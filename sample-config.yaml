@@ -1,0 +1,8 @@
+meta:
+  version: 0.0.0
+  name: smtp-sink
+  type: smtp-sink
+  topic: smtp-sink
+smtp:
+  host: localhost
+  port: 24

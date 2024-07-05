@@ -1,0 +1,14 @@
+[package]
+name = "smtp-sink"
+version = "0.0.0"
+description = "Connector that reads data from a topic to a SMTP server"
+edition = "2021"
+
+[dependencies]
+async-smtp = { version = "0.9" }
+async-trait = { version = "0.1", default-features = false}
+futures = { version = "0.3", default-features = false }
+async-std = { workspace = true }
+anyhow = { version = "1.0" }
+fluvio = { workspace = true }
+fluvio-connector-common = { workspace = true, features = ["derive"] }
