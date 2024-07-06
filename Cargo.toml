@@ -8,7 +8,10 @@ edition = "2021"
 async-smtp = { version = "0.9" }
 async-trait = { version = "0.1", default-features = false}
 futures = { version = "0.3", default-features = false }
-async-std = { workspace = true }
+async-native-tls = { version = "0.5" }
+async-std = { version = "1.12",  default-features = false, features = ["attributes", "tokio1"]}
 anyhow = { version = "1.0" }
-fluvio = { workspace = true }
-fluvio-connector-common = { workspace = true, features = ["derive"] }
+fluvio = { git = "https://github.com/infinyon/fluvio", rev = "06450c8" }
+fluvio-connector-common = { git = "https://github.com/infinyon/fluvio", rev = "06450c8", features = ["derive"] }
+serde = {version = "1.0", default-features = false, features = ["derive"]}
+serde_json = { version = "1.0", default-features = false, features = ["preserve_order"] }
