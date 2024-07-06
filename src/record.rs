@@ -1,5 +1,4 @@
-use serde::{Deserialize, Serialize};
-use serde_json::Result;
+use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Address {

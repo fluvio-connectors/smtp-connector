@@ -4,7 +4,7 @@ mod sink;
 
 use anyhow::Result;
 use config::SmtpConfig;
-use futures::{SinkExt, StreamExt};
+use futures::SinkExt;
 use record::SmtpRecord;
 use sink::SmtpSink;
 
