@@ -57,7 +57,15 @@ impl Sink<SmtpRecord> for SmtpSink {
                     Transport::Tls(SmtpTransport::new(client, stream).await?)
                 } else {
                     tracing::warn!("Not using TLS");
-                    Transport::Cleartext(SmtpTransport::new(client, stream).await?)
+                    match config.dangerous_allow_cleartext {
+                        Some(false) | None => {
+                            tracing::error!("Configuration dangerous_allow_cleartext == false But not using TLS - Panic.");
+                            panic!("Configuration dangerous_allow_cleartext == false But not using TLS");
+                        }
+                        Some(true) => {
+                            Transport::Cleartext(SmtpTransport::new(client, stream).await?)
+                        }
+                    }
                 };
 
                 if let Some(ref user) = config.user {

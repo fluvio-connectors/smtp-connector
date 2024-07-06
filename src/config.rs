@@ -11,6 +11,7 @@ pub(crate) struct SmtpConfig {
 
     pub explicit_tls: bool,
     pub implicit_tls: bool,
+    pub dangerous_allow_cleartext: Option<bool>,
 
     pub user: Option<String>,
     pub password: Option<String>,

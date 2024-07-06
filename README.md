@@ -13,6 +13,7 @@ Reads from Fluvio topic and writes to SMTP.
 | password            | -        | String         | Password for login - must be over TLS                                                                |
 | explicit_tls        | false    | bool           | Require Explicit TLS e.g. STARTTLS over plaintext SMTP port                                     |
 | implicit_tls        | false    | bool           | Require Implicit TLS by ensuring the SMTP session is using TLS at all times                                    |
+| dangerous_allow_cleartext | false | bool        | Allow dangerously cleartext SMTP - Please do not use unless testing |
 
 **Note**: Implicit TLS always takes credence over Explicit TLS (STARTTLS) and generally one should use implicit TLS if available.
 
