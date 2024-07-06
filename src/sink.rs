@@ -6,6 +6,8 @@ use async_std::net::TcpStream;
 use fluvio::Offset;
 use fluvio_connector_common::{tracing, LocalBoxSink, Sink};
 
+use mail_builder::MessageBuilder;
+
 use crate::SmtpConfig;
 
 #[derive(Debug)]
@@ -94,13 +96,15 @@ impl Sink<SmtpRecord> for SmtpSink {
                 let to = async_smtp::EmailAddress::new(record.to.address.clone()).unwrap();
                 let from = async_smtp::EmailAddress::new(record.from.address.clone()).unwrap();
 
-                let email = SendableEmail::new(
-                    Envelope::new(Some(from), vec![to])?,
-                    format!(
-                        "From: <{}>\r\nTo: <{}>\r\nSubject: {}\r\n\r\n{}",
-                        record.from.address, record.to.address, record.subject, record.body
-                    ),
-                );
+                let eml = MessageBuilder::new()
+                    .from((record.from.name, record.from.address))
+                    .to((record.to.name, record.to.address))
+                    .subject(record.subject)
+                    .text_body(record.body)
+                    .write_to_string()
+                    .unwrap();
+
+                let email = SendableEmail::new(Envelope::new(Some(from), vec![to])?, eml);
 
                 tracing::debug!("Sending email {:?}", email.envelope());
 
