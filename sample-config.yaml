@@ -4,5 +4,6 @@ meta:
   type: smtp-sink
   topic: smtp-sink
 smtp:
-  host: localhost
-  port: 24
+  host: your.mail.host.test.com
+  port: 465
+  implicit_tls: true
