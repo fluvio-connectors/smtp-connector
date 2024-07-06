@@ -1,16 +1,19 @@
 mod config;
-mod sink;
 mod record;
+mod sink;
 
 use anyhow::Result;
 use config::SmtpConfig;
 use futures::{SinkExt, StreamExt};
-use sink::SmtpSink;
 use record::SmtpRecord;
+use sink::SmtpSink;
 
 use fluvio_connector_common::{connector, consumer::ConsumerStream, tracing, Sink};
 
-const SIGNATURES: &str = concat!("Fluvio Community SMTP Sink Connector ", env!("CARGO_PKG_VERSION"));
+const SIGNATURES: &str = concat!(
+    "Fluvio Community SMTP Sink Connector ",
+    env!("CARGO_PKG_VERSION")
+);
 
 #[connector(sink)]
 async fn start(config: SmtpConfig, mut stream: impl ConsumerStream) -> Result<()> {

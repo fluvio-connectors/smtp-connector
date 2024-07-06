@@ -3,14 +3,14 @@ use serde_json::Result;
 
 #[derive(Debug, Deserialize)]
 pub struct Address {
-    name: String,
-    address: String,
+    pub name: String,
+    pub address: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct SmtpRecord {
-    subject: String,
-    body: String,
-    from: Address,
-    to: Address,
+    pub subject: String,
+    pub body: String,
+    pub from: Address,
+    pub to: Address,
 }

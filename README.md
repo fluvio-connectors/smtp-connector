@@ -11,7 +11,8 @@ Reads from Fluvio topic and writes to SMTP.
 | port                | -        | Number         | SMTP server port - 25 typically for plaintext (if trusted network or 465 submission w/ auth)                   |
 | user                | -        | String         | Username for plaintext login - must be over TLS - e.g. STARTTLS over 25 or directly over TLS port              |
 | password            | -        | String         | Password for plaintext login - must be over TLS                                                                |
-| dangerous_cert      | false    | String         | DANGEROUS: Upon development / debugging skip TLS cert verify - true (default false)                            |
+| explicit_tls        | false    | bool           | Require Explicit TLS e.g. STARTTLS over plaintext SMTP port (typically 25)                                     |
+| implicit_tls        | false    | bool           | Require Implicit TLS by ensuring the SMTP session is using TLS at all times                                    |
 
 ### Usage Example
 
@@ -25,6 +26,23 @@ cdk deploy start --config config-example.yaml
 
 cdk deploy list # to see the status
 cdk deploy log my-smtp-connector # to see connector's logs
+```
+
+## Adding records
+
+The JSON to use to send an e-mail via SMTP is:
+
+```json
+{
+ "subject": "Testing",
+ "body": "test",
+ "from":
+   {"name": "From Testing",
+    "address": "from_address@test.com"},
+ "to":
+   {"name": "To Name",
+    "address": "to_address@test.com"}
+}
 ```
 
 ## License

@@ -274,19 +274,20 @@ dependencies = [
 
 [[package]]
 name = "async-smtp"
-version = "0.9.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "928ea96f04e1260036cb01f82c1e5dc7c3b478e7b9463c87712297784ce3cdc6"
+checksum = "7384febcabdd07a498c9f4fbaa7e488ff4eb60d0ade14b47b09ec44b8f645301"
 dependencies = [
  "anyhow",
+ "async-std",
  "base64 0.13.1",
+ "bufstream",
  "futures",
  "hostname",
  "log",
  "nom",
  "pin-project",
  "thiserror",
- "tokio",
 ]
 
 [[package]]
@@ -432,6 +433,12 @@ dependencies = [
  "futures-lite 2.3.0",
  "piper",
 ]
+
+[[package]]
+name = "bufstream"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "40e38929add23cdf8a366df9b0e088953150724bcbe5fc330b0d8eb3b328eec8"
 
 [[package]]
 name = "built"
@@ -2808,7 +2815,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba4f4a02a7a80d6f274636f0aa95c7e383b912d41fe721a31f29e29698585a4a"
 dependencies = [
  "backtrace",
- "bytes",
  "num_cpus",
  "pin-project-lite",
  "tokio-macros",
