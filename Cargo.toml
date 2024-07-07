@@ -1,0 +1,18 @@
+[package]
+name = "smtp-sink"
+version = "0.0.0"
+description = "Connector that reads data from a topic to a SMTP server"
+edition = "2021"
+
+[dependencies]
+async-smtp = { version = "0.8", default-features = false, features = ["runtime-async-std"] }
+async-trait = { version = "0.1", default-features = false}
+futures = { version = "0.3", default-features = false }
+async-native-tls = { version = "0.5" }
+async-std = { version = "1.12",  default-features = false, features = ["attributes", "tokio1", "unstable"]}
+anyhow = { version = "1.0" }
+fluvio = { git = "https://github.com/infinyon/fluvio", rev = "06450c8" }
+fluvio-connector-common = { git = "https://github.com/infinyon/fluvio", rev = "06450c8", features = ["derive"] }
+serde = {version = "1.0", default-features = false, features = ["derive"]}
+serde_json = { version = "1.0", default-features = false, features = ["preserve_order"] }
+mail-builder = { version = "0.3" }

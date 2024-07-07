@@ -1,0 +1,9 @@
+meta:
+  version: 0.0.0
+  name: smtp-sink
+  type: smtp-sink
+  topic: smtp-sink
+smtp:
+  host: your.mail.host.test.com
+  port: 465
+  implicit_tls: true
