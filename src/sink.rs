@@ -96,13 +96,23 @@ impl Sink<SmtpRecord> for SmtpSink {
                 let to = async_smtp::EmailAddress::new(record.to.address.clone()).unwrap();
                 let from = async_smtp::EmailAddress::new(record.from.address.clone()).unwrap();
 
-                let eml = MessageBuilder::new()
+                let mut eml_rec = MessageBuilder::new()
                     .from((record.from.name, record.from.address))
                     .to((record.to.name, record.to.address))
                     .subject(record.subject)
-                    .text_body(record.body)
-                    .write_to_string()
-                    .unwrap();
+                    .text_body(record.body);
+
+                if let Some(attachments) = record.attachments {
+                    for attachment in attachments {
+                        eml_rec = eml_rec.attachment(
+                            attachment.content_type,
+                            attachment.file_name,
+                            attachment.bytes,
+                        );
+                    }
+                }
+
+                let eml = eml_rec.write_to_string().unwrap();
 
                 let email = SendableEmail::new(Envelope::new(Some(from), vec![to])?, eml);
 
